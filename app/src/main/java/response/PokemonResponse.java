@@ -1,5 +1,6 @@
 package response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Pokemon;
@@ -9,7 +10,27 @@ public class PokemonResponse {
     private String next;
     private String previous;
 
-    List<Pokemon> results;
+    private static PokemonResponse instance;
+
+    private List<Pokemon> results;
+
+    private PokemonResponse() {
+        results = new ArrayList<>();
+    }
+
+    public static synchronized PokemonResponse getInstance() {
+        if (instance == null) {
+            instance = new PokemonResponse(); // Crear la instancia si no existe
+        }
+        return instance;
+    }
+
+    public void inicializar(Integer count, String next, String previous, List<Pokemon> results) {
+        this.count = count;
+        this.next = next;
+        this.previous = previous;
+        this.results = results;
+    }
 
     public Integer getCount() {
         return count;

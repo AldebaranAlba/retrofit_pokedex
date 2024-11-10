@@ -54,17 +54,25 @@ public class MainActivity extends AppCompatActivity {
             //Viene en sobresito
             public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
                 if(response.isSuccessful()){
+                    //Se crea por primera vez
+                    //SE INSTANCIA POR RETROFIT. USA LOS PARAMETROS Y METODOS DE LA CLASE PokemonResponse
+                    //PERO NO USA EL CONSTRUCTOR DE ESTE, USA UN CONSTRUCTOR ESPECIAL DE RETROFIT. IGNORANDO EL CONSTRUCTOR DE LA CLASE
                     PokemonResponse pokemonData = response.body();
 
-                    for(int i = 0; i < pokemonData.getResults().size(); i++){
+                    //Creo la instancia singleton  y guardo los datos de pokemonData
+                    PokemonResponse pokeSingleton = PokemonResponse.getInstance();
+
+                    pokeSingleton.inicializar(pokemonData.getCount(),pokemonData.getNext(),pokemonData.getPrevious(),pokemonData.getResults());
+
+                    for(int i = 0; i < pokeSingleton.getResults().size(); i++){
                         Pokemon poke = new Pokemon();
-                        poke.setName(pokemonData.getResults().get(i).getName());
-                        poke.setUrl(pokemonData.getResults().get(i).getUrl());
+                        poke.setName(pokeSingleton.getResults().get(i).getName());
+                        poke.setUrl(pokeSingleton.getResults().get(i).getUrl());
                         pokemonList.add(poke);
-//                        Log.i("Pokemon",pokemonData.getResults().get(i).getName());
-//                        Log.i("URL",pokemonData.getResults().get(i).getUrl());
-                        Log.i("Pokemon",poke.getName());
-                        Log.i("URL",poke.getUrl());
+                        Log.i("Pokemon",pokeSingleton.getResults().get(i).getName());
+                        Log.i("URL",pokeSingleton.getResults().get(i).getUrl());
+//                        Log.i("Pokemon",poke.getName());
+//                        Log.i("URL",poke.getUrl());
                         adaper.notifyDataSetChanged();
                     }
                 }
