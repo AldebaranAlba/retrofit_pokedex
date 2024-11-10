@@ -17,7 +17,7 @@ public class Pokemon {
         return url;
     }
 
-    public void setUrl(String ut) {
-        this.url = ut;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
