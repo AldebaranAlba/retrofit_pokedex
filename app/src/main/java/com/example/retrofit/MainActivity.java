@@ -71,10 +71,17 @@ public class MainActivity extends AppCompatActivity {
                         pokemonList.add(poke);
                         Log.i("Pokemon",pokeSingleton.getResults().get(i).getName());
                         Log.i("URL",pokeSingleton.getResults().get(i).getUrl());
+
 //                        Log.i("Pokemon",poke.getName());
 //                        Log.i("URL",poke.getUrl());
                         adaper.notifyDataSetChanged();
                     }
+
+
+//                    for(){
+//
+//                    }
+
                 }
             }
 
